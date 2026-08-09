@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mrrhabiri.github.io/4k-streaming-bandwidth-calculator/sitemap.xml

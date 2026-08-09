@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>4K Streaming Bandwidth Calculator | Internet Speed Estimator</title>
+<meta name="description" content="Free calculator for estimating internet speed needed for SD, HD, Full HD and 4K streaming across multiple devices.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://mrrhabiri.github.io/4k-streaming-bandwidth-calculator/">
+<style>
+body{font-family:Arial,sans-serif;background:#0b1020;color:#eef4ff;margin:0;line-height:1.6}.wrap{max-width:850px;margin:auto;padding:50px 20px}.card{background:#121a2e;border:1px solid #273451;border-radius:18px;padding:24px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}label{display:block;font-weight:700;margin-bottom:6px}select,input{width:100%;padding:12px;border-radius:10px;border:1px solid #273451;background:#0c1426;color:#eef4ff}button{margin-top:18px;padding:12px 18px;border:0;border-radius:10px;background:#68e0a0;font-weight:700;cursor:pointer}.result{margin-top:20px;padding:20px;border-radius:14px;background:#0c1426}.big{font-size:3rem;font-weight:800;color:#68e0a0}a{color:#68e0a0}.muted{color:#aab7cf}.credit{margin-top:28px;padding-top:18px;border-top:1px solid #273451}@media(max-width:650px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<h1>4K Streaming Bandwidth Calculator</h1>
+<p class="muted">Estimate how much internet bandwidth your household needs for smooth streaming.</p>
+<section class="card">
+<div class="grid">
+<div><label for="quality">Streaming quality</label><select id="quality"><option value="3">SD (480p)</option><option value="5">HD (720p)</option><option value="8">Full HD (1080p)</option><option value="25" selected>4K / Ultra HD</option></select></div>
+<div><label for="devices">Simultaneous streams</label><input id="devices" type="number" min="1" max="20" value="1"></div>
+<div><label for="headroom">Safety margin</label><select id="headroom"><option value="1">None</option><option value="1.2">20%</option><option value="1.35" selected>35% recommended</option><option value="1.5">50%</option></select></div>
+<div><label for="other">Other household usage (Mbps)</label><input id="other" type="number" min="0" max="1000" value="10"></div>
+</div>
+<button id="calculate" type="button">Calculate bandwidth</button>
+<div class="result"><div>Recommended connection</div><div class="big"><span id="speed">48</span> Mbps</div><div class="muted" id="detail"></div></div>
+<p class="muted">These values are practical estimates. Actual requirements vary by codec, service, device and network conditions.</p>
+<p class="credit">Published by <a href="https://iptvabonnementmaroc.com/">IPTV Abonnement Maroc</a>.</p>
+</section>
+</main>
+<script>
+const q=document.getElementById('quality'),d=document.getElementById('devices'),h=document.getElementById('headroom'),o=document.getElementById('other'),out=document.getElementById('speed'),detail=document.getElementById('detail');
+function calc(){const ps=+q.value||0,ds=Math.max(1,+d.value||1),ot=Math.max(0,+o.value||0),m=Math.max(1,+h.value||1),r=Math.ceil((ps*ds+ot)*m);out.textContent=r;detail.textContent=ds+' stream(s) at '+q.options[q.selectedIndex].text+' plus '+ot+' Mbps other use.'}
+document.getElementById('calculate').onclick=calc;[q,d,h,o].forEach(x=>x.onchange=calc);calc();
+</script>
+</body>
+</html>
